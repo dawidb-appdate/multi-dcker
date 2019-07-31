@@ -13,7 +13,6 @@ after_success:
  - docker build -t dawidmbury/multi-nginx ./nginx
  - docker build -t dawidmbury/multi-server ./server
  - docker build -t dawidmbury/multi-worker ./worker
-
  #log in to docker-cli
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
  #take these image and push to docker hub
@@ -22,17 +21,17 @@ after_success:
  - docker push dawidmbury/multi-server
  - docker push dawidmbury/multi-worker
 
- deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "multi-docker"
-  env: "MultiDocker-env"
-  bucket_name: "elasticbeanstalk-us-east-2-137670674866"
-  bucket_path: "docker-multi"
-  on:
-   branch: master
-  access_key_id: 
-   secure: "$AWS_ACCESS_KEY"
-  secret_access_key:
-   secure: "$AWS_SECRET_KEY"
+deploy:
+ provider: elasticbeanstalk
+ region: "us-east-2"
+ app: "multi-docker"
+ env: "MultiDocker-env"
+ bucket_name: "elasticbeanstalk-us-east-2-137670674866"
+ bucket_path: "docker-multi"
+ on:
+  branch: master
+ access_key_id: 
+  secure: "$AWS_ACCESS_KEY"
+ secret_access_key:
+  secure: "$AWS_SECRET_KEY"
   
